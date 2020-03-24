@@ -1,0 +1,12 @@
+/* This file is for your main application css. */
+@import "./phoenix.css";
+
+.btn.focus, .btn:focus {
+    outline: 0;
+    box-shadow: none!important;
+}
+
+p {
+  font-size: small;
+}
+

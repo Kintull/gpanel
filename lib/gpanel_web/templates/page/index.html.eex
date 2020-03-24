@@ -1,0 +1,92 @@
+<div class="container">
+  <div class="row">
+    <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :warning) %></p>
+
+    <% collection = [%{"Server1" => %{status: "status", ip: "ip"}}] %>
+    <table>
+      <thead>
+        <tr>
+          <th scope="col" style="width: 20%">#</th>
+          <th scope="col" style="width: 20%"><h4>Name</h4></th>
+          <th scope="col" style="width: 20%"><h4>Controls</h4></th>
+          <th scope="col" style="width: 20%"><h4>Status</h4></th>
+          <th scope="col" style="width: 20%"><h4>IP Address</h4></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+            <th scope="row"><p>1</p></th>
+            <td><p>Server1</p></td>
+            <td>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-warning" onClick="startServer()">Start</button>
+                <button type="button" class="btn btn-warning" onClick="stopServer()">Stop</button>
+              </div>
+            </td>
+            <td>
+              <p id="server-status"></p>
+            </td>
+            <td>
+              <p id="server-ip"></p>
+              <div id="wait-server" class="spinner-border text-primary"></div>
+            </td>
+          </tr>
+      <tbody>
+    </table>
+  </div>
+</div>
+
+
+<script>
+  var $loading = $('#wait-server').hide();
+  $(document)
+    .ajaxStart(function () {
+      $loading.show();
+    })
+    .ajaxStop(function () {
+      $loading.hide();
+    });
+
+  function startServer(){
+      var CSRF_TOKEN = <%= raw Poison.encode!(Plug.CSRFProtection.get_csrf_token()) %>;
+      $.ajax({
+                type: 'POST',
+                url: '<%= Routes.page_path(@conn, :start_server) %>',
+                beforeSend: function(xhr) {
+                            xhr.setRequestHeader("X-CSRF-Token", CSRF_TOKEN);
+                        },
+                success: function(data) {
+                    setStatusLabels(data);
+                },
+                error: function(data) {
+                    setStatusLabels(data);
+                }
+            });
+   };
+
+  function stopServer(){
+        var CSRF_TOKEN = <%= raw Poison.encode!(Plug.CSRFProtection.get_csrf_token()) %>;
+        $.ajax({
+                  type: 'POST',
+                  url: '<%= Routes.page_path(@conn, :stop_server) %>',
+                  beforeSend: function(xhr) {
+                              xhr.setRequestHeader("X-CSRF-Token", CSRF_TOKEN);
+                          },
+                  success: function(data) {
+                      setStatusLabels(data);
+                  },
+                  error: function() {
+                      setStatusLabels(data);
+                  }
+              });
+     };
+
+   function setStatusLabels(data) {
+      console.log(data)
+
+      let serverStatus = document.querySelector("#server-status")
+      let serverIp = document.querySelector("#server-ip")
+      serverStatus.innerText = `${data.body.status}`
+      serverIp.innerText = `${data.body.ip}`
+   }
+</script>

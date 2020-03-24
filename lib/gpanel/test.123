@@ -1,0 +1,33 @@
+
+      def self.basic_inputs
+        [
+          basic_input(:enabled, show_when: "notInPrettyBetty()"),
+          basic_input(:description, :show_when => "notInPrettyBetty()"),
+          basic_input(:use_fpaas, show_when: "Betty.fpaas_actions_support"),
+          basic_input(:create_model_id, :name => :model_id, :input_type => :model, :only => %w(create), :show_when => "notEndpointAction() && usesFpaas()"),
+          basic_input(:update_model_id, :name => :model_id, :input_type => :model, :readonly => "modelIsSet()", :only => %w(show update), :show_when => "notEndpointAction()  && usesFpaas()"),
+          basic_input(:callbacks, :type => "select_multiple", :set => CALLBACKS, :show_when => "showModelFields()  && usesFpaas()", :label => "Triggers"),
+          basic_input(:role_ids, :required => true, :input_type => "token_input", :url => "/roles", :default => "userRoles()", :values => "allRoles()", :show_when => "manualNotEndpointAction()  && usesFpaas()", :clear => %w(callbacks), :label => "Roles"),
+          basic_input(:variables, :type => "variables", :value => "getVariables()", :fieldset => "Variables", :label => "Variables", :show_when => "notEndpointAction() && usesFpaas()"),
+          basic_input(:input_variables, :type => "sortable_variables", :value => "getInputVariables()", :initial_attributes => {:input_variable => true}, :fieldset => "Variables", :show_when => "notEndpointAction() && usesFpaas()"),
+          basic_input(:schedule, :show_when => "showModelFields() && usesFpaas()"),
+          basic_input(:batch, :show_when => "showModelFields() && usesFpaas()"),
+          basic_input(:background, :show_when => "isBackgroundAllowed() && usesFpaas()", dependent: %w(callbacks)),
+          basic_input(:notify, :type => "select", :set => [{:label => "No", :value => DONT_NOTIFY}, {:label => "Yes", :value => DO_NOTIFY}, {:label => "Yes; and show popup when ready", :value => NOTIFY_WITH_POPUP}], :show_when => "inBackground() && usesFpaas()", :dependent => %w(background), :label => "Show notification when executing"),
+          basic_input(:uniqueness, :show_when => "inBackground() && usesFpaas()", :dependent => %w(background), :label => "Execute", :set => [{:label => "Max one at a time", :value => APPLICATION}, {:label => "Max one per record at a time", :value => "record"}, {:label => "Without limits", :value => "unlimited"}], :include_blank => false),
+          basic_input(:preserve_records, :label => "Preserve collection", :show_when => "showModelFieldsAndBatch() && usesFpaas()", :clear => %w(batch)),
+          basic_input(:index_number, :advanced => true, :show_when => "notEndpointAction() && usesFpaas()"),
+          basic_input(:help_text, :show_when => "notInPrettyBetty() && usesFpaas()"),
+          basic_input(:confirmation_message, :show_when => "notInPrettyBetty() && usesFpaas()"),
+          basic_input(:log_variables, :label => "Debug action and events", :show_when => "notInPrettyBetty() && usesFpaas()"),
+          basic_input(:log_execution, :label => "Log execution of action", :show_when => "notInPrettyBetty() && usesFpaas()"),
+          basic_input(:enable_callback_action, label: "Enable callback action", fieldset: "Callback action", :show_when => "notInPrettyBetty() && usesFpaas()"),
+          basic_input(:callback_action, :label => "Action", :input_type => :model_action, :model_actions => "modelActions()", fieldset: "Callback action", show_when: "callbackActionEnabled()", clear_value: 'new', clear: %w(enable_callback_action)),
+          basic_input(:result, :input_type => 'variables_browser', :available_variables => 'allEventVariables()', :show_when => "showActionResult() && usesFpaas()", :clear => %w(background)),
+          basic_input(:assign, :type => "hash", :key_collection => "assignableCallbackActionInputVariables()", :allow_unknown_types => true, :available_variables => 'allVariables()', :clear => %w(callback_action enable_callback_action), :show_when => "notCallbackActionIsNew() && usesFpaas()", fieldset: "Callback action"),
+          basic_input(:force_foreground, :label => "Execute this action in foreground", :show_when => "callbackActionInBackground() && usesFpaas()", :clear => %w(callback_action enable_callback_action), fieldset: "Callback action"),
+          basic_input(:force_all_foreground, :label => "Execute all actions in foreground", :show_when => "callbackActionInBackgroundAndForceForeground() && usesFpaas()", :clear => %w(callback_action force_foreground enable_callback_action), fieldset: "Callback action"),
+          {test_button: {type: 'action_button', :only => %w(update), show_when: 'notEndpointAction() && usesFpaas()'}},
+          {dependencies: {type: "dependencies", fieldset: "Dependent items", only: %w(update), :show_when => "notInPrettyBetty() && usesFpaas()",}}
+        ]
+      end
