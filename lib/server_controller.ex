@@ -1,4 +1,4 @@
-defmodule Gpanel.ServerController do
+defmodule GPanel.ServerController do
   use GenStateMachine
 
   @moduledoc """
@@ -64,20 +64,20 @@ defmodule Gpanel.ServerController do
   end
 
   def test() do
-    Gpanel.ServerController.start_link([])
-    {:idle, nil} = Gpanel.ServerController.get_status()
+    GPanel.ServerController.start_link([])
+    {:idle, nil} = GPanel.ServerController.get_status()
 
-    Gpanel.ServerController.start_server()
-    {:starting, nil} = Gpanel.ServerController.get_status()
-
-    :timer.sleep(4100)
-    {:running, "1.2.3.4"} = Gpanel.ServerController.get_status()
-
-    Gpanel.ServerController.stop_server()
-    {:stopping, nil} = Gpanel.ServerController.get_status()
+    GPanel.ServerController.start_server()
+    {:starting, nil} = GPanel.ServerController.get_status()
 
     :timer.sleep(4100)
-    {:idle, nil} = Gpanel.ServerController.get_status()
+    {:running, "1.2.3.4"} = GPanel.ServerController.get_status()
+
+    GPanel.ServerController.stop_server()
+    {:stopping, nil} = GPanel.ServerController.get_status()
+
+    :timer.sleep(4100)
+    {:idle, nil} = GPanel.ServerController.get_status()
   end
 
   defp start_container do

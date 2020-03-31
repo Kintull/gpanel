@@ -1,4 +1,4 @@
-defmodule Gpanel.Repo do
+defmodule GPanel.Repo do
   use Ecto.Repo,
     otp_app: :gpanel,
     adapter: Ecto.Adapters.Postgres

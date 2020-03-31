@@ -1,4 +1,4 @@
-defmodule GpanelWeb.ChannelCase do
+defmodule GPanelWeb.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -21,15 +21,15 @@ defmodule GpanelWeb.ChannelCase do
       use Phoenix.ChannelTest
 
       # The default endpoint for testing
-      @endpoint GpanelWeb.Endpoint
+      @endpoint GPanelWeb.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Gpanel.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(GPanel.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Gpanel.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(GPanel.Repo, {:shared, self()})
     end
 
     :ok

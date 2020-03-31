@@ -1,7 +1,7 @@
-defmodule GpanelWeb.Endpoint do
+defmodule GPanelWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :gpanel
 
-  socket "/socket", GpanelWeb.UserSocket,
+  socket "/socket", GPanelWeb.UserSocket,
     websocket: true,
     longpoll: false
 
@@ -13,7 +13,7 @@ defmodule GpanelWeb.Endpoint do
     at: "/",
     from: :gpanel,
     gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt template.html)
+    only: ~w(css fonts images js favicon.ico robots.txt template.html 404.html)
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
@@ -42,5 +42,5 @@ defmodule GpanelWeb.Endpoint do
     key: "_gpanel_key",
     signing_salt: "JdfuoWfP"
 
-  plug GpanelWeb.Router
+  plug GPanelWeb.Router
 end

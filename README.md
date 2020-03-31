@@ -1,4 +1,4 @@
-# Gpanel
+# GPanel
 
 To start your Phoenix server:
 

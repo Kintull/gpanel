@@ -1,3 +1,3 @@
-defmodule GpanelWeb.LayoutViewTest do
-  use GpanelWeb.ConnCase, async: true
+defmodule GPanelWeb.LayoutViewTest do
+  use GPanelWeb.ConnCase, async: true
 end

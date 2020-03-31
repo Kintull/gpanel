@@ -1,4 +1,4 @@
-defmodule GpanelWeb.ErrorHelpers do
+defmodule GPanelWeb.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """
@@ -36,9 +36,9 @@ defmodule GpanelWeb.ErrorHelpers do
     # should be written to the errors.po file. The :count option is
     # set by Ecto and indicates we should also apply plural rules.
     if count = opts[:count] do
-      Gettext.dngettext(GpanelWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(GPanelWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(GpanelWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(GPanelWeb.Gettext, "errors", msg, opts)
     end
   end
 end

@@ -8,15 +8,15 @@
 use Mix.Config
 
 config :gpanel,
-  ecto_repos: [Gpanel.Repo],
+  ecto_repos: [GPanel.Repo],
   script_dir: "/Users/romanberg/project/gpanel"
 
 # Configures the endpoint
-config :gpanel, GpanelWeb.Endpoint,
+config :gpanel, GPanelWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "uRjyTMdLtdlgqUn7X2xc+ClnbBb98U+u12JrIcKk5CTeMz3VEf+AjSyBpHiNcfjW",
-  render_errors: [view: GpanelWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Gpanel.PubSub, adapter: Phoenix.PubSub.PG2]
+  render_errors: [view: GPanelWeb.ErrorView, accepts: ~w(html json)],
+  pubsub: [name: GPanel.PubSub, adapter: Phoenix.PubSub.PG2]
 
 
 # Configures Elixir's Logger

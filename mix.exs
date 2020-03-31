@@ -1,4 +1,4 @@
-defmodule Gpanel.MixProject do
+defmodule GPanel.MixProject do
   use Mix.Project
 
   def project do
@@ -19,7 +19,7 @@ defmodule Gpanel.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Gpanel.Application, []},
+      mod: {GPanel.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end
@@ -44,7 +44,8 @@ defmodule Gpanel.MixProject do
       {:gettext, "~> 0.11"},
       {:gen_state_machine, "~> 2.0"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:comeonin, "~> 2.5"}
     ]
   end
 

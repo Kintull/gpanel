@@ -1,3 +1,3 @@
-defmodule GpanelWeb.LayoutView do
-  use GpanelWeb, :view
+defmodule GPanelWeb.LayoutView do
+  use GPanelWeb, :view
 end

@@ -6,7 +6,7 @@ use Mix.Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
-config :gpanel, GpanelWeb.Endpoint,
+config :gpanel, GPanelWeb.Endpoint,
   http: [port: 400],
   debug_errors: true,
   code_reloader: true,
@@ -46,7 +46,7 @@ config :gpanel, GpanelWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :gpanel, GpanelWeb.Endpoint,
+config :gpanel, GPanelWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
@@ -67,7 +67,7 @@ config :phoenix, :stacktrace_depth, 20
 config :phoenix, :plug_init_mode, :runtime
 
 # Configure your database
-config :gpanel, Gpanel.Repo,
+config :gpanel, GPanel.Repo,
   username: "postgres",
   password: "docker",
   database: "gpanel_dev",

@@ -1,4 +1,4 @@
-defmodule GpanelWeb.ConnCase do
+defmodule GPanelWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -19,18 +19,18 @@ defmodule GpanelWeb.ConnCase do
     quote do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
-      alias GpanelWeb.Router.Helpers, as: Routes
+      alias GPanelWeb.Router.Helpers, as: Routes
 
       # The default endpoint for testing
-      @endpoint GpanelWeb.Endpoint
+      @endpoint GPanelWeb.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Gpanel.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(GPanel.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Gpanel.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(GPanel.Repo, {:shared, self()})
     end
 
     {:ok, conn: Phoenix.ConnTest.build_conn()}

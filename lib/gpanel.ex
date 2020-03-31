@@ -1,6 +1,6 @@
-defmodule Gpanel do
+defmodule GPanel do
   @moduledoc """
-  Gpanel keeps the contexts that define your domain
+  GPanel keeps the contexts that define your domain
   and business logic.
 
   Contexts are also responsible for managing your data, regardless

@@ -1,6 +1,6 @@
-defmodule GpanelWeb.ServerStatus do
+defmodule GPanelWeb.ServerStatus do
   use Phoenix.Channel
-  alias Gpanel.ServerController
+  alias GPanel.ServerController
 
   def join("server:status", _msg, socket) do
     send(self(), :send_feed)

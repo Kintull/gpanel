@@ -1,5 +1,5 @@
-defmodule GpanelWeb.PageControllerTest do
-  use GpanelWeb.ConnCase
+defmodule GPanelWeb.PageControllerTest do
+  use GPanelWeb.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get(conn, "/")

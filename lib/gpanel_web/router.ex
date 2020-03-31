@@ -1,5 +1,5 @@
-defmodule GpanelWeb.Router do
-  use GpanelWeb, :router
+defmodule GPanelWeb.Router do
+  use GPanelWeb, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -13,10 +13,12 @@ defmodule GpanelWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", GpanelWeb do
+  scope "/", GPanelWeb do
     pipe_through :browser
 
     get "/", PageController, :index
+
+    resources "/users", UserController, only: [:show, :create]
 
     scope "/api/" do
         post "/start_server", PageController, :start_server
@@ -25,7 +27,7 @@ defmodule GpanelWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", GpanelWeb do
+  # scope "/api", GPanelWeb do
   #   pipe_through :api
   # end
 end

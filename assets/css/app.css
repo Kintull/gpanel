@@ -171,3 +171,35 @@ p {
 .register-form-container {
   padding: 40px;
 }
+
+@font-face {
+  font-family: ATFont;
+  src: url('/fonts/pieces.ttf');
+}
+
+.not-found-text {
+  text-align: center;
+  font-size: 100px;
+  color: #ca2f3a;
+  text-shadow: 2px 2px rgba(144, 144, 144, 0.97);
+  font-family: ATFont;
+}
+
+.not-found {
+  /*background: #60a9ff;*/
+  /*background: -moz-linear-gradient(top, #60a9ff 0%, #4394f4 100%);*/
+  /*background: -webkit-linear-gradient(top, #60a9ff 0%,#4394f4 100%);*/
+  /*background: linear-gradient(to bottom, #60a9ff 0%,#4394f4 100%);*/
+  background-image: url('/images/404-1.jpg');
+  color: #bce8f1;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#60a9ff', endColorstr='#4394f4',GradientType=0 );*/
+  height: 500px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}

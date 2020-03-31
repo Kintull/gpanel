@@ -1,12 +1,12 @@
-defmodule GpanelWeb do
+defmodule GPanelWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, views, channels and so on.
 
   This can be used in your application as:
 
-      use GpanelWeb, :controller
-      use GpanelWeb, :view
+      use GPanelWeb, :controller
+      use GPanelWeb, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -19,11 +19,11 @@ defmodule GpanelWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: GpanelWeb
+      use Phoenix.Controller, namespace: GPanelWeb
 
       import Plug.Conn
-      import GpanelWeb.Gettext
-      alias GpanelWeb.Router.Helpers, as: Routes
+      import GPanelWeb.Gettext
+      alias GPanelWeb.Router.Helpers, as: Routes
     end
   end
 
@@ -31,7 +31,7 @@ defmodule GpanelWeb do
     quote do
       use Phoenix.View,
         root: "lib/gpanel_web/templates",
-        namespace: GpanelWeb
+        namespace: GPanelWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 1, get_flash: 2, view_module: 1]
@@ -39,9 +39,9 @@ defmodule GpanelWeb do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import GpanelWeb.ErrorHelpers
-      import GpanelWeb.Gettext
-      alias GpanelWeb.Router.Helpers, as: Routes
+      import GPanelWeb.ErrorHelpers
+      import GPanelWeb.Gettext
+      alias GPanelWeb.Router.Helpers, as: Routes
     end
   end
 
@@ -56,7 +56,7 @@ defmodule GpanelWeb do
   def channel do
     quote do
       use Phoenix.Channel
-      import GpanelWeb.Gettext
+      import GPanelWeb.Gettext
     end
   end
 

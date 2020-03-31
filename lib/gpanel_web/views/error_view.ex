@@ -1,5 +1,5 @@
-defmodule GpanelWeb.ErrorView do
-  use GpanelWeb, :view
+defmodule GPanelWeb.ErrorView do
+  use GPanelWeb, :view
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.

@@ -1,6 +1,6 @@
-defmodule GpanelWeb.PageController do
-  use GpanelWeb, :controller
-  alias Gpanel.ServerController
+defmodule GPanelWeb.PageController do
+  use GPanelWeb, :controller
+  alias GPanel.ServerController
 
 
   def index(conn, _params) do
