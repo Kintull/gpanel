@@ -12,7 +12,21 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   </head>
 
+
   <body>
+    <header>
+      <nav class="navbar bg-dark">
+        <div class="col-2"></div>
+        <div class="col-7">
+          <a href="/" class="btn btn-outline-info">Home</a>
+        </div>
+        <div class="col-3">
+          <a href="/login" class="btn btn-outline-success" type="submit">Login</a>
+          <a href="/registration" class="btn btn-outline-warning" type="submit">Register</a>
+        </div>
+      </nav>
+    </header>
+
     <main role="main">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>

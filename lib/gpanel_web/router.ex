@@ -18,7 +18,13 @@ defmodule GPanelWeb.Router do
 
     get "/", PageController, :index
 
-    resources "/users", UserController, only: [:show, :create]
+    get "/registration", RegistrationController, :new
+    post "/registration", RegistrationController, :register
+
+    get "/login", LoginController, :new
+    post "/login", RegistrationController, :login
+
+#    resources "/users", UserController, only: [:show, :create]
 
     scope "/api/" do
         post "/start_server", PageController, :start_server

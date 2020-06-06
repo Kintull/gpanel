@@ -1,13 +1,18 @@
-defmodule GPanelWeb.UserController do
+defmodule GPanelWeb.RegistrationController do
   use GPanelWeb, :controller
 
   alias GPanel.Schemas.User
   alias GPanel.Repo
 
-  def create(conn, params) do
+  def new(conn, _params) do
+    changeset = User.changeset(%User{})
+    render(conn, changeset: changeset)
+  end
+
+  def register(conn, params) do
     IO.inspect(params, label: "create user params")
 
-    changeset = User.create_user_changeset(%User{}, params)
+    changeset = User.changeset(%User{}, params)
 
     case Repo.insert(changeset) do
       {:ok, user} ->
@@ -18,7 +23,6 @@ defmodule GPanelWeb.UserController do
         |> put_flash(:info, "User cannot be created, please contact support")
         |> redirect(to: "/")
     end
-
   end
 
   @spec show(Plug.Conn.t(), any) :: Plug.Conn.t()
@@ -31,7 +35,6 @@ defmodule GPanelWeb.UserController do
 
      user ->
        conn
-         |> put_flash(:info, "User found")
          |> render("show.html", %{user: user})
     end
   end

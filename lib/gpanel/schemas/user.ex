@@ -11,10 +11,11 @@ defmodule GPanel.Schemas.User do
     timestamps()
   end
 
-  def create_user_changeset(user, params \\ %{}) do
+  def changeset(user, params \\ %{}) do
     user
     |> Changeset.cast(params, [:email, :password])
     |> Changeset.validate_required([:email, :password])
+    |> Changeset.unique_constraint([:email])
     |> Changeset.validate_length(:password, min: 6, max: 100)
     |> hash_password()
   end

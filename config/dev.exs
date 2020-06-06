@@ -73,3 +73,8 @@ config :gpanel, GPanel.Repo,
   database: "gpanel_dev",
   hostname: "localhost",
   pool_size: 10
+
+config :elidactyl, :pterodactyl_url, "207.180.233.243"
+config :elidactyl, :pterodactyl_auth_token, "FeMbSTLh5A9ETGiA1Zc3hXs7gUjcyTV544vZNk5TWOhaDoEF"
+
+import_config "dev.secret.exs"

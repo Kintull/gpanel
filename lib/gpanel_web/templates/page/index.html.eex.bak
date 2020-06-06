@@ -1,0 +1,92 @@
+<html>
+<link rel="stylesheet" href="/css/app.css") />
+<link rel="stylesheet" href="/css/pricing-table.css") />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<body>
+<%= form_for @conn, Routes.user_path(@conn, :create), fn f -> %>
+  <div class="background">
+      <div class="container-pricing container">
+          <div class="panel pricing-table">
+              <div class="pricing-plan">
+                  <img src="https://s22.postimg.cc/8mv5gn7w1/paper-plane.png" alt="" class="pricing-img">
+                  <h2 class="pricing-header">Small</h2>
+                  <ul class="pricing-features">
+                      <li class="pricing-features-item">1 vCore</li>
+                      <li class="pricing-features-item">4GB RAM</li>
+                      <li class="pricing-features-item">Unlimited slots</li>
+                  </ul>
+                  <span class="pricing-price">Free</span>
+                  <div class="pricing-button">
+                      <input type="radio" id="minimal-radio-button" name="package-button" value="Sign up" checked>
+                      <label for="minimal-radio-button">Select</label>
+                  </div>
+              </div>
+
+              <div class="pricing-plan">
+                  <img src="https://s28.postimg.cc/ju5bnc3x9/plane.png" alt="" class="pricing-img">
+                  <h2 class="pricing-header">Medium</h2>
+                  <ul class="pricing-features">
+                      <li class="pricing-features-item">2 vCores</li>
+                      <li class="pricing-features-item">8GB RAM</li>
+                      <li class="pricing-features-item">Unlimited slots</li>
+                  </ul>
+                  <span class="pricing-price">$12</span>
+                  <div class="pricing-button">
+                      <input type="radio" id="medium-radio-button" name="package-button" value="Sign up" checked>
+                      <label for="medium-radio-button">Select</label>
+                  </div>
+              </div>
+
+              <div class="pricing-plan">
+                  <img src="https://s21.postimg.cc/tpm0cge4n/space-ship.png" alt="" class="pricing-img">
+                  <h2 class="pricing-header">Large</h2>
+                  <ul class="pricing-features">
+                      <li class="pricing-features-item">4 vCores</li>
+                      <li class="pricing-features-item">12GB RAM</li>
+                      <li class="pricing-features-item">Unlimited slots</li>
+                  </ul>
+                  <span class="pricing-price">$24</span>
+                  <div class="pricing-button">
+                      <input type="radio" id="big-radio-button" name="package-button" value="Sign up" checked>
+                      <label for="big-radio-button">Select</label>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <!-- Material form register -->
+  <div class="register-form-container container">
+      <div class="col-sm-12 offset-lg-3 col-lg-6">
+
+              <div class="form-group row">
+                  <div class="col-sm-12">
+                      <%= email_input f, :email, class: "register-form-control", placeholder: "Email" %>
+                  </div>
+              </div>
+              <div class="form-group row">
+                  <div class="col-sm-12">
+                    <%= password_input f, :password, class: "register-form-control", id: "inputPassword", placeholder: "Password" %>
+                  </div>
+              </div>
+              <div class="form-group row">
+                  <div class="col-sm-10 offset-sm-2">
+                      <label class="form-check-label"><input type="checkbox"> Remember me</label>
+                  </div>
+              </div>
+              <div class="form-group row">
+                  <div class="col-sm-10 offset-sm-2">
+                      <input type="hidden" value="<%= Plug.CSRFProtection.get_csrf_token() %>" name="_csrf_token"/>
+                      <%= submit "Sign up", class: "btn btn-lg btn-warning" %>
+                  </div>
+              </div>
+      </div>
+  </div>
+<% end %>
+
+
+</body>
+</html>
