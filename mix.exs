@@ -46,7 +46,11 @@ defmodule GPanel.MixProject do
       {:gen_state_machine, "~> 2.0"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:comeonin, "~> 2.5"}
+      {:comeonin, "~> 2.5"},
+      {:wallaby, "~> 0.25.0", runtime: false, only: :test},
+      {:ueberauth, "~> 0.6"},
+      {:ueberauth_identity, "~> 0.3.0"},
+      {:guardian, "~> 2.1"}
     ]
   end
 
@@ -60,7 +64,14 @@ defmodule GPanel.MixProject do
     [
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate", "test"]
+      test: ["assets.compile --quiet", "ecto.create --quiet", "ecto.migrate", "test"],
+      "assets.compile": &compile_assets/1
     ]
+  end
+
+  defp compile_assets(_) do
+    Mix.shell().cmd("./assets/node_modules/webpack/bin/webpack.js --mode development",
+      quiet: true
+    )
   end
 end

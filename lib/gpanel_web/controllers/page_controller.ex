@@ -1,7 +1,7 @@
 defmodule GPanelWeb.PageController do
   use GPanelWeb, :controller
-  alias GPanel.ServerController
 
+  alias GPanel.ServerController
 
   def index(conn, _params) do
     render(conn, "index.html")

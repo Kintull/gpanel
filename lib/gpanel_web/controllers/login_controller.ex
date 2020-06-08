@@ -5,13 +5,11 @@ defmodule GPanelWeb.LoginController do
   alias GPanel.Repo
 
   def new(conn, _params) do
-    changeset = User.changeset(%User{})
-    render(conn, changeset: changeset)
+#    changeset = User.changeset(%User{})
+    render(conn, changeset: conn, action: "/login")
   end
 
   def login(conn, params) do
-    IO.inspect(params, label: "create user params")
-
     changeset = User.changeset(%User{}, params)
 
     case Repo.insert(changeset) do

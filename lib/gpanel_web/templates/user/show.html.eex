@@ -2,7 +2,7 @@
   <div class="row">
     <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :warning) %></p>
 
-    <% collection = [%{"Server1" => %{status: "status", ip: "ip"}}] %>
+    <% [%{"Server1" => %{status: "status", ip: "ip"}}] %>
     <table>
       <thead>
         <tr>

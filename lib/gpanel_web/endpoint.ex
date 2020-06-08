@@ -1,6 +1,10 @@
 defmodule GPanelWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :gpanel
 
+  if Application.get_env(:gpanel, :sql_sandbox) do
+    plug Phoenix.Ecto.SQL.Sandbox
+  end
+
   socket "/socket", GPanelWeb.UserSocket,
     websocket: true,
     longpoll: false

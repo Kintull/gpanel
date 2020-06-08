@@ -27,6 +27,22 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+config :wallaby, driver: Wallaby.Chrome
+
+config :ueberauth, Ueberauth,
+       providers: [
+         identity: {Ueberauth.Strategy.Identity, [
+           param_nesting: "account",
+           request_path: "/registration",
+           callback_path: "/auth/identity/callback",
+           callback_methods: ["POST"]
+         ]}
+       ]
+
+config :gpanel, GPanelWeb.Authentication,
+       issuer: "gpanel",
+       secret_key: System.get_env("GUARDIAN_SECRET_KEY")
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

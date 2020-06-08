@@ -9,27 +9,32 @@ defmodule GPanelWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :guardian do
+    plug GPanelWeb.Authentication.Pipeline
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
 
   scope "/", GPanelWeb do
-    pipe_through :browser
+    pipe_through [:browser, :guardian]
 
     get "/", PageController, :index
-
     get "/registration", RegistrationController, :new
-    post "/registration", RegistrationController, :register
+    post "/auth/identity/callback", RegistrationController, :register_callback
 
     get "/login", LoginController, :new
-    post "/login", RegistrationController, :login
+    post "/login", LoginController, :login
 
-#    resources "/users", UserController, only: [:show, :create]
+    get "/users", UserController, :show
 
-    scope "/api/" do
-        post "/start_server", PageController, :start_server
-        post "/stop_server", PageController, :stop_server
-    end
+  end
+
+  scope "/api/", GPanelWeb do
+    pipe_through [:browser, :api]
+    post "/start_server", PageController, :start_server
+    post "/stop_server", PageController, :stop_server
   end
 
   # Other scopes may use custom stacks.
