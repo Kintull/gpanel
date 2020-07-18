@@ -1,7 +1,7 @@
 defmodule GPanelWeb.AccountsTest do
   use GPanel.DataCase
   alias GPanel.Repo
-  alias GPanel.Schemas.User
+  alias GPanel.Accounts.User
   alias GPanel.Accounts
 
   test "register for an account with valid information" do

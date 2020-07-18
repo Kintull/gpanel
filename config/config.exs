@@ -27,19 +27,24 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
-config :wallaby, driver: Wallaby.Chrome
-
 config :ueberauth, Ueberauth,
        providers: [
          identity: {Ueberauth.Strategy.Identity, [
-           param_nesting: "account",
+           param_nesting: "user",
            request_path: "/registration",
            callback_path: "/auth/identity/callback",
            callback_methods: ["POST"]
          ]}
+#  ,
+#         identity: {Ueberauth.Strategy.Identity, [
+#           param_nesting: "user",
+#           request_path: "/login",
+#           callback_path: "/auth/identity/callback",
+#           callback_methods: ["POST"]
+#         ]}
        ]
 
-config :gpanel, GPanelWeb.Authentication,
+config :gpanel, GPanelWeb.Guardian,
        issuer: "gpanel",
        secret_key: System.get_env("GUARDIAN_SECRET_KEY")
 

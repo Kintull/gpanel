@@ -30,36 +30,30 @@ defmodule GPanel.ServerController do
 
   # Callbacks
   def handle_event({:call, from}, :get_status, state, data) do
-    IO.inspect("got get_status")
     {:keep_state_and_data, [{:reply, from, status_to_json(state, data)}]}
   end
 
   def handle_event(:cast, :start_server, :idle, data) do
-    IO.inspect("got start_server")
     GenStateMachine.cast(__MODULE__, :process_start)
     {:next_state, :starting, data}
   end
 
   def handle_event(:cast, :stop_server, :running, _data) do
-    IO.inspect("got stort_server")
     GenStateMachine.cast(__MODULE__, :process_stop)
     {:next_state, :stopping, nil}
   end
 
   def handle_event(:cast, :process_start, :starting, _data) do
-    IO.inspect("got process_start")
     :timer.sleep(4000)
     {:next_state, :running, "1.2.3.4"}
   end
 
   def handle_event(:cast, :process_stop, :stopping, _data) do
-    IO.inspect("got process_stop")
     :timer.sleep(4000)
     {:next_state, :idle, nil}
   end
 
   def handle_event(:cast, _cmd, _state, _data) do
-    IO.inspect("got event in wrong state")
     :keep_state_and_data
   end
 

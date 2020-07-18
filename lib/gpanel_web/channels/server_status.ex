@@ -15,7 +15,6 @@ defmodule GPanelWeb.ServerStatus do
   end
 
   def handle_info(:send_feed, socket) do
-    IO.inspect("in send feed")
     status = ServerController.get_status()
     broadcast!(socket, "feed", %{"body" => status})
     {:noreply, socket}

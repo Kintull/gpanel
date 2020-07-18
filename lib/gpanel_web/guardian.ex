@@ -1,4 +1,4 @@
-  defmodule GPanelWeb.Authentication do
+  defmodule GPanelWeb.Guardian do
   @moduledoc """
   Implementation module for Guardian and functions for authentication.
   """

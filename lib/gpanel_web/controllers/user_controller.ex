@@ -1,7 +1,7 @@
 defmodule GPanelWeb.UserController do
   use GPanelWeb, :controller
 
-  alias GPanel.Schemas.User
+  alias GPanel.Accounts.User
   alias GPanel.Repo
 
   @spec show(Plug.Conn.t(), any) :: Plug.Conn.t()

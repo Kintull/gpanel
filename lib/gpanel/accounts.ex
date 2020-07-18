@@ -4,26 +4,37 @@ defmodule GPanel.Accounts do
     * user creation
   """
 
-  alias GPanel.Schemas.User
+  alias GPanel.Accounts.User
   alias GPanel.Repo
 
-  def register_user(%Ueberauth.Auth{} = params) do
+  def get_or_create_user(account_params) do
+    case get_user_by_email(account_params.email) do
+      %User{} = user ->
+        user
+      nil ->
+        create_user(account_params)
+    end
+  end
+
+  def create_user(account_params) do
     %User{}
-    |> User.changeset(extract_user_params(params))
+    |> User.changeset(account_params)
+    |> IO.inspect(label: "changeset")
     |> Repo.insert()
   end
 
-  def update_user(user \\ %User{}) do
-    User.changeset(user, %{})
+  @spec user_changeset(User.t()) :: Ecto.Changeset.t()
+  def user_changeset(user \\ %User{}) do
+    User.changeset(user)
   end
 
-  def get_user(user \\ %User{}) do
-    Repo.get(User, user.id)
+  @spec get_user(integer) :: User.t() | nil
+  def get_user(id) do
+    Repo.get(User, id)
   end
 
-  defp extract_user_params(%{credentials: %{other: other}, info: info}) do
-    info
-    |> Map.from_struct()
-    |> Map.merge(other)
+  @spec get_user_by_email(binary) :: User.t() | nil
+  def get_user_by_email(email) do
+    Repo.get_by(User, email: email)
   end
 end

@@ -1,4 +1,13 @@
 <div class="container" style="height:1300px;">
+    <div>
+      <a class="buy-with-crypto"
+         href="https://commerce.coinbase.com/checkout/46942c14-cd90-4f2a-a239-2d36f3f4d03c">
+        Buy with Crypto
+      </a>
+      <script src="https://commerce.coinbase.com/v1/checkout.js?version=201807">
+      </script>
+    </div>
+
     <form action="/registration" method="get">
       <div class="form-group row mt-5 pt-5">
         <div class="col-sm-12">

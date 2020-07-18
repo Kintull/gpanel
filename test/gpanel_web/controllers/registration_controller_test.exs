@@ -1,7 +1,7 @@
 defmodule GPanelWeb.RegistrationControllerTest do
   use GPanelWeb.ConnCase
   alias GPanel.Repo
-  alias GPanel.Schemas.User
+  alias GPanel.Accounts.User
 
   test "GET /registration", %{conn: conn} do
     conn = get(conn, "/registration")

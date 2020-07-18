@@ -1,7 +1,7 @@
 defmodule GPanelWeb.UserControllerTest do
   use GPanelWeb.ConnCase
   alias GPanel.Repo
-  alias GPanel.Schemas.User
+  alias GPanel.Accounts.User
 
   test "POST /users", %{conn: conn} do
     password = "123123"

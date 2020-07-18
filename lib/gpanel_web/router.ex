@@ -10,7 +10,11 @@ defmodule GPanelWeb.Router do
   end
 
   pipeline :guardian do
-    plug GPanelWeb.Authentication.Pipeline
+    plug GPanelWeb.Guardian.Pipeline
+  end
+
+  pipeline :ensure_auth do
+    plug Guardian.Plug.EnsureAuthenticated
   end
 
   pipeline :api do
@@ -21,13 +25,16 @@ defmodule GPanelWeb.Router do
     pipe_through [:browser, :guardian]
 
     get "/", PageController, :index
-    get "/registration", RegistrationController, :new
-    post "/auth/identity/callback", RegistrationController, :register_callback
 
     get "/login", LoginController, :new
-    post "/login", LoginController, :login
+    get "/registration", RegistrationController, :new
 
-    get "/users", UserController, :show
+    post "/auth/identity/callback", AuthenticationController, :identity_callback
+
+    scope "/users" do
+      pipe_through :ensure_auth
+      resources "/users", UserController, only: [:show], singleton: true
+    end
 
   end
 

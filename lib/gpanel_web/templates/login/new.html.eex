@@ -3,7 +3,7 @@
     <div class="col col-lg-4"></div>
     <div class="col">
         <h3>Welcome back!</h3>
-        <%= form_for @changeset, @action, [as: :user], fn f -> %>
+        <%= form_for @changeset, @callback_url, [as: :user], fn f -> %>
             <div class="form-group row">
                 <div class="col-sm-12">
                   <%= email_input f, :email, class: "register-form-control", placeholder: "Email" %>
