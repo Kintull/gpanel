@@ -1,7 +1,5 @@
 use Mix.Config
 
-config :wallaby, driver: Wallaby.Chrome
-
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
 config :gpanel, GPanelWeb.Endpoint,
@@ -16,19 +14,7 @@ config :logger, level: :warn
 # Configure your database
 config :gpanel, GPanel.Repo,
   username: "postgres",
-  password: "docker",
+  password: "postgres",
   database: "gpanel_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
-
-# Configure Pterdactyl test database
-config :elidactyl, Elidactyl.PanelRepo,
-       username: "ptero",
-       password: "pterodbpass",
-       database: "pterodactyl",
-       hostname: "207.180.233.243",
-       pool_size: 10
-
-config :gpanel, GPanelWeb.Guardian,
-       issuer: "gpanel",
-       secret_key: "tRIEuU9IU4SelmHctkiHB0I1HyhZ72L4FXsXd0TZFSDLoQ1rMujzTTfwY7QyJ6SJ"

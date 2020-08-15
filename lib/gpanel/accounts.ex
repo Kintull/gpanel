@@ -7,10 +7,11 @@ defmodule GPanel.Accounts do
   alias GPanel.Accounts.User
   alias GPanel.Repo
 
+  @spec get_or_create_user(map) :: {:ok, User.t()} | {:error, any}
   def get_or_create_user(account_params) do
     case get_user_by_email(account_params.email) do
       %User{} = user ->
-        user
+        {:ok, user}
       nil ->
         create_user(account_params)
     end
@@ -19,7 +20,6 @@ defmodule GPanel.Accounts do
   def create_user(account_params) do
     %User{}
     |> User.changeset(account_params)
-    |> IO.inspect(label: "changeset")
     |> Repo.insert()
   end
 

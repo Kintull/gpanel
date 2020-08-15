@@ -6,8 +6,8 @@
   use Guardian, otp_app: :gpanel
   alias GPanel.Accounts
 
-  def subject_for_token(resource, _claims) do
-    {:ok, to_string(resource.id)}
+  def subject_for_token(user, _claims) do
+    {:ok, to_string(user.email)}
   end
 
   def resource_from_claims(%{"sub" => id}) do
@@ -18,8 +18,10 @@
   end
 
   def log_in(conn, user) do
-    require IEx; IEx.pry
-
     __MODULE__.Plug.sign_in(conn, user)
+  end
+
+  def user_authorized?(conn) do
+    __MODULE__.Plug.authenticated?(conn)
   end
 end

@@ -9,23 +9,18 @@ defmodule GPanelWeb.RegistrationControllerTest do
   end
 
   test "POST /auth/identity/callback", %{conn: conn} do
-    email = "test@gmail.com"
-    params = %{
-      email: email,
-      password: "123123",
-      password_confirmation: "123213"
-    }
+    email = "test@email.com"
 
     conn =
       conn
-      |> Plug.Conn.assign(:ueberauth_auth, valid_account_params())
-      |> post("/auth/identity/callback", params)
+      |> Plug.Conn.assign(:ueberauth_auth, valid_account_params(%{email: email}))
+      |> post("/auth/identity/callback")
 
-    %User{} = Repo.get_by(User, email: email)
+    assert %User{} = Repo.get_by(User, email: email)
     assert html_response(conn, 302)
   end
 
-  defp valid_account_params do
+  defp valid_account_params(%{email: email}) do
     %Ueberauth.Auth{
       credentials: %Ueberauth.Auth.Credentials{
         other: %{
@@ -34,7 +29,7 @@ defmodule GPanelWeb.RegistrationControllerTest do
         }
       },
       info: %Ueberauth.Auth.Info{
-        email: "me@example.com"
+        email: email
       }
     }
   end

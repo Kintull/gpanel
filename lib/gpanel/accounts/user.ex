@@ -3,6 +3,8 @@ defmodule GPanel.Accounts.User do
   alias Ecto.Changeset
   alias Comeonin.Bcrypt
 
+  @type t :: %__MODULE__{}
+
   @required [:email, :password, :password_confirmation]
   @optional []
 

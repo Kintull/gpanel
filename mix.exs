@@ -36,7 +36,7 @@ defmodule GPanel.MixProject do
       {:phoenix, "~> 1.4.2"},
       {:phoenix_pubsub, "~> 1.1"},
       {:phoenix_ecto, "~> 4.0"},
-      {:elidactyl, "~> 0.1.1"},
+      {:elidactyl, "~> 0.1.2"},
       {:poison, "~> 3.0"},
       {:ecto_sql, "~> 3.0"},
       {:postgrex, ">= 0.0.0"},
@@ -50,7 +50,8 @@ defmodule GPanel.MixProject do
       {:wallaby, "~> 0.25.0", runtime: false, only: :test},
       {:ueberauth, "~> 0.6"},
       {:ueberauth_identity, "~> 0.3.0"},
-      {:guardian, "~> 2.1"}
+      {:guardian, "~> 2.1"},
+      {:ex_machina, "~> 2.4", only: :test}
     ]
   end
 

@@ -1,48 +1,50 @@
 defmodule GPanelWeb.AccountsTest do
   use GPanel.DataCase
+
+  import Support.Factory
+
   alias GPanel.Repo
   alias GPanel.Accounts.User
   alias GPanel.Accounts
 
-  test "register for an account with valid information" do
+  test "create new user with valid params" do
     pre_count = count_of(User)
     params = valid_account_params()
 
-    result = Accounts.register_user(params)
+    result = Accounts.get_or_create_user(params)
 
     assert {:ok, %User{}} = result
     assert pre_count + 1 == count_of(User)
   end
 
 
-  test "register for an account with an existing email address" do
+  test "get an account with an existing email address" do
     params = valid_account_params()
-    Repo.insert!(%User{email: params.info.email})
+
+    build(:user, params)
+    |> Repo.insert!()
 
     pre_count = count_of(User)
 
-    result = Accounts.register_user(params)
+    result = Accounts.get_or_create_user(params)
+
+    assert {:ok, %User{}} = result
+    assert pre_count == count_of(User)
+  end
+
+  test "fail to create a user without matching password and confirmation" do
+    pre_count = count_of(User)
+    params = password_dont_match_params()
+    result = Accounts.get_or_create_user(params)
 
     assert {:error, %Ecto.Changeset{}} = result
     assert pre_count == count_of(User)
   end
 
-  test "register for an account without matching password and confirmation" do
+  test "fail to create a user with bad email" do
     pre_count = count_of(User)
-    %{credentials: credentials} = params = valid_account_params()
-
-    params = %{
-      params
-    | credentials: %{
-        credentials
-      | other: %{
-          password: "superdupersecret",
-          password_confirmation: "somethingelse"
-        }
-      }
-    }
-
-    result = Accounts.register_user(params)
+    params = bad_email_params()
+    result = Accounts.get_or_create_user(params)
 
     assert {:error, %Ecto.Changeset{}} = result
     assert pre_count == count_of(User)
@@ -53,16 +55,26 @@ defmodule GPanelWeb.AccountsTest do
   end
 
   defp valid_account_params do
-    %Ueberauth.Auth{
-      credentials: %Ueberauth.Auth.Credentials{
-        other: %{
-          password: "superdupersecret",
-          password_confirmation: "superdupersecret"
-        }
-      },
-      info: %Ueberauth.Auth.Info{
+    %{
+      password: "12345678",
+      password_confirmation: "12345678",
+      email: "me@example.com"
+    }
+  end
+
+  defp password_dont_match_params do
+      %{
+        password: "12345678",
+        password_confirmation: "87654321",
         email: "me@example.com"
       }
+  end
+
+  defp bad_email_params do
+    %{
+      password: "12345678",
+      password_confirmation: "87654321",
+      email: "example"
     }
   end
 end
