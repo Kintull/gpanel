@@ -73,14 +73,6 @@ config :gpanel, GPanelWeb.Guardian,
        issuer: "gpanel",
        secret_key: System.get_env("GUARDIAN_SECRET_KEY")
 
-# Configure Pterodactyl test database
-config :elidactyl, Elidactyl.PanelRepo,
-       username:  System.get_env("PTERODACTYL_DB_USER"),
-       password: System.get_env("PTERODACTYL_DB_PASSWORD"),
-       database: System.get_env("PTERODACTYL_DB_NAME"),
-       hostname: System.get_env("PTERODACTYL_DB_HOSTNAME"),
-       pool_size: 10
-
 config :elidactyl, :pterodactyl_url, System.get_env("PTERODACTYL_URL")
 config :elidactyl, :pterodactyl_server_auth_token,  System.get_env("PTERODACTYL_SERVER_AUTH_TOKEN")
 config :elidactyl, :pterodactyl_client_auth_token,  System.get_env("PTERODACTYL_CLIENT_AUTH_TOKEN")
