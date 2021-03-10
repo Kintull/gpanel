@@ -29,19 +29,18 @@ config :phoenix, :json_library, Jason
 
 config :ueberauth, Ueberauth,
        providers: [
-         identity: {Ueberauth.Strategy.Identity, [
+         identity_registration: {Ueberauth.Strategy.Identity, [
            param_nesting: "user",
            request_path: "/registration",
            callback_path: "/auth/identity/callback",
            callback_methods: ["POST"]
+         ]},
+         identity_login: {Ueberauth.Strategy.Identity, [
+           param_nesting: "user",
+           request_path: "/login",
+           callback_path: "/auth/identity/callback",
+           callback_methods: ["POST"]
          ]}
-#  ,
-#         identity: {Ueberauth.Strategy.Identity, [
-#           param_nesting: "user",
-#           request_path: "/login",
-#           callback_path: "/auth/identity/callback",
-#           callback_methods: ["POST"]
-#         ]}
        ]
 
 config :gpanel, GPanelWeb.Guardian,

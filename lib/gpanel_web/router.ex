@@ -33,7 +33,7 @@ defmodule GPanelWeb.Router do
 
     scope "/users" do
       pipe_through :ensure_auth
-      resources "/users", UserController, only: [:show], singleton: true
+      resources "/", UserController, only: [:show], singleton: true
     end
 
   end

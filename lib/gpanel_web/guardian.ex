@@ -11,7 +11,7 @@
   end
 
   def resource_from_claims(%{"sub" => id}) do
-    case Accounts.get_user(id) do
+    case Accounts.get_user_by_email(id) do
       nil -> {:error, :resource_not_found}
       user -> {:ok, user}
     end
@@ -23,5 +23,9 @@
 
   def user_authorized?(conn) do
     __MODULE__.Plug.authenticated?(conn)
+  end
+
+  def get_current_user(conn) do
+    __MODULE__.Plug.current_resource(conn)
   end
 end

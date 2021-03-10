@@ -3,6 +3,8 @@ defmodule GPanelWeb.LoginController do
 
   alias Ueberauth.Strategy.Helpers
 
+  plug Ueberauth
+
   def new(conn, _params) do
     render(conn,
       :new,

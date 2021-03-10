@@ -42,6 +42,7 @@ defmodule GPanel.Accounts.User do
       %{valid?: true, changes: %{password: password}} ->
         Changeset.put_change(changeset, :password_hash, Bcrypt.hashpwsalt(password))
       _ ->
+        Bcrypt.dummy_checkpw()
         changeset
     end
   end

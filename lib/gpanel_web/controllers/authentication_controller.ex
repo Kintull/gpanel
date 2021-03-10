@@ -22,12 +22,8 @@ defmodule GPanelWeb.AuthenticationController do
       {:error, changeset} ->
         Logger.error("Failed to get or create user #{inspect changeset}")
         conn
-        |> put_view(RegistrationView)
-        |> render(
-             :new,
-             changeset: changeset,
-             callback_url: Helpers.callback_url(conn)
-          )
+        |> put_flash(:error, "Failed to get or create user")
+        |> redirect(to: "/")
     end
   end
 
