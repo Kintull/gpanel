@@ -1,6 +1,13 @@
 defmodule GPanelWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :gpanel
 
+  @session_options [
+    store: :cookie,
+    key: "_gpanel_key",
+    signing_salt: "pRYv0WA8asDpOu1spPubsplvAp9n1ApqnziYnsKYwe"
+  ]
+
+
   if Application.get_env(:gpanel, :sql_sandbox) do
     plug Phoenix.Ecto.SQL.Sandbox
   end
@@ -8,6 +15,8 @@ defmodule GPanelWeb.Endpoint do
   socket "/socket", GPanelWeb.UserSocket,
     websocket: true,
     longpoll: false
+
+  socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -41,10 +50,7 @@ defmodule GPanelWeb.Endpoint do
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.
-  plug Plug.Session,
-    store: :cookie,
-    key: "_gpanel_key",
-    signing_salt: "JdfuoWfP"
+  plug Plug.Session, @session_options
 
   plug GPanelWeb.Router
 end

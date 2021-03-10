@@ -16,8 +16,8 @@ config :gpanel, GPanelWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "uRjyTMdLtdlgqUn7X2xc+ClnbBb98U+u12JrIcKk5CTeMz3VEf+AjSyBpHiNcfjW",
   render_errors: [view: GPanelWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: GPanel.PubSub, adapter: Phoenix.PubSub.PG2]
-
+  pubsub: [name: GPanel.PubSub, adapter: Phoenix.PubSub.PG2],
+  live_view: [signing_salt: "FmsUVMyzxhT0TwAF"]
 
 # Configures Elixir's Logger
 config :logger, :console,
